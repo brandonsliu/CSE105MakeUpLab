@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script>
+      window.TrackJS && TrackJS.install({ 
+      token: "96ab4e789d7746dcbc341d0bd7aa633b"
+      // for more configuration options, see https://docs.trackjs.com
+      });
+    </script>           
+    <script>
+      class TypeError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = 'TypeError';
+        }
+      }
+
+      function calculate() {
+        try {
+          let op = document.getElementById("operation").value;
+          let num1 = Number(document.getElementById('num-one').value);
+          let num2 = Number(document.getElementById('num-two').value);
+          if (isNaN(num1) || isNaN(num2)){
+            throw new TypeError('Wrong input type');
+          }
+          if(op == "+"){
+            document.getElementById('answer').innerText = num1+num2;
+          }
+          else if(op == "-"){
+            document.getElementById('answer').innerText = num1-num2;
+          }
+          else if(op == "*"){
+            document.getElementById('answer').innerText = num1*num2;
+          }
+          else{
+            document.getElementById('answer').innerText = num1/num2;
+          }
+        } catch (err) {
+          console.error(err.message);
+        } finally {
+          console.log('Finally, calculation over');
+        }
+      }
+
+      function consoleLog() {
+        let value = document.getElementById("answer").innerText;
+        console.log(`Calculated ${value}`);
+      }
+
+      function consoleError() {
+        console.error('Go ahead and calculate something');
+      }
+
+      function consoleTable() {
+        console.table([
+          {
+            symbol: "+",
+            operation: "Addition",
+          },
+          {
+            symbol: "-",
+            operation: "Subtraction",
+          },
+          {
+            symbol: "*",
+            operation: "Multiplication",
+          },
+          {
+            symbol: "/",
+            operation: "Division",
+          }
+        ]);
+      }
+
+      function consoleDir() {
+        console.dir(document);
+      }
+
+      function consoleDirXML() {
+        console.dirxml(document);
+      }
+
+      function consoleGroup() {
+        console.group('ConsoleGroup');
+      }
+
+      function consoleGroupEnd() {
+        console.groupEnd('ConsoleGroup');
+      }
+
+      function consoleTime() {
+        console.time();
+      }
+
+      function consoleTimeEnd() {
+        console.timeEnd();
+      }
+
+      function consoleTrace() {
+        let num = window.prompt('Pick a number (not too large please)');
+        areWeThereYet(num);
+      }
+
+      function areWeThereYet(num) {
+        if(num == 1 || num == 0){
+           return weGetThereWhenWeGetThere();
+        }
+        else{
+          return no(num-1);
+        }
+      }
+
+      function no(num) {
+        return areWeThereYet(num-1);
+      }
+
+      function weGetThereWhenWeGetThere() {
+        console.trace();
+        console.log("We're here");
+      }
+
+      function globalError() {
+        throw 'Hi pal';
+      }
+
+      window.onerror = (err) => {
+        console.error('onerror handling errors');
+        return true;
+      }
+    </script>
+  </head>
+  <body>
+    <input id="num-one" type="text">
+    <select id="operation">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input id="num-two" type="text">
+    <button id="calculate" onclick="calculate()">Calculate</button>
+    <p id="answer"></p>
+    <br>
+    <button id="console-log" onclick="consoleLog()">console.log</button>
+    <button id="console-error" onclick="consoleError()">console.error</button>
+    <button id="console-table" onclick="consoleTable()">console.table</button>
+    <button id="console-dir" onclick="consoleDir()">console.dir</button>
+    <button id="console-dirxml" onclick="consoleDirXML()">console.dirxml</button>
+    <button id="console-group" onclick="consoleGroup()">console.group</button>
+    <button id="console-group-end" onclick="consoleGroupEnd()">console.groupEnd</button>
+    <button id="console-time" onclick="consoleTime()">console.time</button>
+    <button id="console-time-end" onclick="consoleTimeEnd()">console.timeEnd</button>
+    <button id="console-trace" onclick="consoleTrace()">console.trace</button>
+    <button id="global-error" onclick="globalError()">global error</button>
+  </body>
+</html>
