@@ -1,1 +1,1 @@
-https://brandonsliu.github.io/CSE105MakeUpLab/
+https://brandonsliu.github.io/CSE110MakeUpLab/
